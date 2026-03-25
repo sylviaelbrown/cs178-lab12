@@ -31,10 +31,22 @@ def hello(name):
 
 @app.route('/analyze/<word>')
 def analyze(word):
-    return str(len(word))
-    # Count the characters in `word` and return as a string
-    # Example: /analyze/Drake  →  should display: 5
+    # Step 1: character count (already done)
+    num_chars = len(word)
+    num_vowels = 0
+
+    for character in word:
+        if character.lower in "aeiou":
+            num_vowels += 1
     
+    # Count vowels (a, e, i, o, u) — case insensitive, y is not a vowel
+    # Hint: word.lower() converts to lowercase before checking each character
+
+    # render_template passes all variables into analyze.html
+    return render_template('analyze.html',
+                           word=word,
+                           num_chars=num_chars,
+                           num_vowels=num_vowels)
 
 
 # ============================================================
